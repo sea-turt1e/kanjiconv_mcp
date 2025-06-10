@@ -165,14 +165,22 @@ name = "kanjiconv-mcp"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "fugashi" },
     { name = "kanjiconv" },
     { name = "mcp" },
+    { name = "sudachidict-full" },
+    { name = "sudachipy" },
+    { name = "unidic" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "fugashi" },
     { name = "kanjiconv" },
     { name = "mcp" },
+    { name = "sudachidict-full" },
+    { name = "sudachipy" },
+    { name = "unidic" },
 ]
 
 [[package]]
