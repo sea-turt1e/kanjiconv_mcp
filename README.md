@@ -2,8 +2,6 @@
 
 Japanese kanji conversion MCP server using [kanjiconv](https://github.com/sea-turt1e/kanjiconv) library.
 
-![demo](images/kanjiconv_mcp.gif)
-
 ## Features
 
 This MCP server provides Japanese text conversion tools:
