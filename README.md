@@ -22,7 +22,7 @@ All tools support various options including:
 
 1. Clone this repository:
 ```bash
-git clone <repository-url>
+git clone kanjiconv_mcp
 cd kanjiconv_mcp
 ```
 
@@ -35,7 +35,7 @@ uv sync
 
 1. Clone this repository:
 ```bash
-git clone <repository-url>
+git clone kanjiconv_mcp
 cd kanjiconv_mcp
 ```
 
@@ -46,7 +46,6 @@ python -m unidic download
 ```
 
 ### Option 3: Using Docker
-
 Build and run with Docker:
 ```bash
 # Build using uv (default)
