@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "kanjiconv-docker": {
+      "command": "docker",
+      "args": ["run", "--rm", "-i", "kanjiconv-mcp:latest"],
+      "cwd": "path/to/kanjiconv_mcp"
+    },
+    "kanjiconv-compose": {
+      "command": "docker-compose",
+      "args": ["exec", "-T", "kanjiconv-mcp", "uv", "run", "python", "main.py"],
+      "cwd": "path/to/kanjiconv_mcp"
+    }
+  }
+}

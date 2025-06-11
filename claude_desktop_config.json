@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "kanjiconv": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/path/to/kanjiconv_mcp",
+        "run",
+        "python",
+        "main.py"
+      ]
+        }
+    }
+}

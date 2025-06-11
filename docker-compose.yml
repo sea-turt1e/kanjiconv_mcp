@@ -1,0 +1,22 @@
+services:
+  kanjiconv-mcp:
+    build: .
+    container_name: kanjiconv-mcp-server
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      # Mount the current directory for development
+      - .:/app
+      # Preserve uv cache
+      - uv-cache:/root/.cache/uv
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    # For MCP servers, we typically don't expose ports as they use stdio
+    # but you can uncomment the following if needed for debugging
+    # ports:
+    #   - "8000:8000"
+
+volumes:
+  uv-cache:

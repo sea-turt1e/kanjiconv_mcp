@@ -1,0 +1,35 @@
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Docker volumes
+uv-cache/
+
+# Development
+.env
+.env.local
+
+# Python cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Testing
+test_client.py
+.pytest_cache/
