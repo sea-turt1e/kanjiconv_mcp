@@ -21,9 +21,6 @@ ADD . /app
 WORKDIR /app
 RUN uv sync --locked
 
-# Copy project configuration
-# COPY pyproject.toml ./
-
 # Install additional dependencies
 RUN uv run python -m unidic download
 
