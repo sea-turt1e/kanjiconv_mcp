@@ -83,10 +83,15 @@ Add to your Claude Desktop configuration file:
   "mcpServers": {
     "kanjiconv": {
       "command": "uv",
-      "args": ["run", "python", "/path/to/kanjiconv_mcp/main.py"],
-      "cwd": "/path/to/kanjiconv_mcp"
+      "args": [
+        "--directory",
+        "/path/to/kanjiconv_mcp",
+        "run",
+        "python",
+        "main.py"
+      ]
+        }
     }
-  }
 }
 ```
 
@@ -96,7 +101,7 @@ Add to your Claude Desktop configuration file:
   "mcpServers": {
     "kanjiconv": {
       "command": "docker",
-      "args": ["run", "--rm", "-i", "kanjiconv-mcp"],
+      "args": ["run", "--rm", "-i", "kanjiconv-mcp:latest"],
       "cwd": "/path/to/kanjiconv_mcp"
     }
   }
