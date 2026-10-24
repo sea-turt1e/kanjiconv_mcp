@@ -1,6 +1,7 @@
-mcp
+mcp<2
 kanjiconv
 sudachipy
 sudachidict-full
 unidic
 fugashi
+certifi>=2026.10.19

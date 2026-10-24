@@ -1,14 +1,15 @@
 [project]
 name = "kanjiconv-mcp"
-version = "0.1.0"
+version = "0.2.0"
 description = "MCP server for Japanese kanji conversion using kanjiconv"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "mcp",
+    "mcp<2",
     "kanjiconv",
     "sudachipy",
     "sudachidict-full",
     "unidic",
     "fugashi",
+    "certifi>=2026.10.19",
 ]

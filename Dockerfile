@@ -1,9 +1,10 @@
-# Use Python 3.13-slim-bookworm as the base image
-FROM python:3.13-slim-bookworm
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+# Use Python 3.15.1-slim-bookworm as the base image (patched for the eMudhra CA compromise)
+FROM python:3.15.1-slim-bookworm
+COPY --from=ghcr.io/astral-sh/uv:0.13.5 /uv /uvx /bin/
 
-# Install system dependencies including Rust compiler
-RUN apt-get update && apt-get install -y \
+# Update ca-certificates (eMudhra CA fix) and install system dependencies including Rust compiler
+RUN apt-get update && apt-get install -y --only-upgrade ca-certificates \
+    && apt-get install -y \
     curl \
     build-essential \
     pkg-config \
