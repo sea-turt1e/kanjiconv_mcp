@@ -16,6 +16,38 @@ All tools support various options including:
 - UniDic integration for improved accuracy
 - Different Sudachi dictionary types (full, small, core)
 
+## Requirements
+
+### Python version
+
+Use one of the following Python versions (or a newer patch release of the same line):
+
+- **3.15.1** (default, pinned in `.python-version` and the Docker images)
+- **3.14.9**
+- **3.13.17**
+
+These releases include the fix for the [compromised eMudhra intermediate CA certificates](https://emudhra.we-have-a-problem.com/). Older releases, including the whole 3.12 line and earlier, still trust these certificates.
+
+The server checks the running Python version at startup. If it is not one of the versions above, it logs a warning to stderr. The server still starts.
+
+### certifi
+
+`certifi` **2026.10.19 or later** is required. That release removes the affected eMudhra certificates from the CA bundle. The requirement is declared in `pyproject.toml` and `requirements.txt`. The server also logs a warning at startup if an older `certifi` is installed.
+
+To update an existing environment:
+
+```bash
+# uv
+uv sync
+
+# pip
+pip install --upgrade "pip>=26.2.2" "certifi>=2026.10.19"
+```
+
+### Other tools
+
+The Docker images use `python:3.15.1-slim-bookworm`, uv 0.13.5, and pip 26.2.2 or later, and they upgrade the Debian `ca-certificates` package at build time. If you run the server locally, also update uv to 0.13.5 or later. For your OS, browsers, and other tools, follow the [eMudhra incident page](https://emudhra.we-have-a-problem.com/).
+
 ## Installation
 
 ### Option 1: Using uv (Recommended)

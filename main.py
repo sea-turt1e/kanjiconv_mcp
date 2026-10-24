@@ -3,7 +3,10 @@
 
 import asyncio
 import logging
+import sys
 from typing import Any
+
+import certifi
 
 from kanjiconv import KanjiConv
 from kanjiconv.entities import SudachiDictType
@@ -16,6 +19,31 @@ from pydantic import BaseModel
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Python versions patched for the compromised eMudhra intermediate CAs
+# (https://emudhra.we-have-a-problem.com/), as the minimum micro version per minor line
+PATCHED_PYTHON_VERSIONS = {(3, 13): 17, (3, 14): 9, (3, 15): 1}
+MIN_CERTIFI_VERSION = "2026.10.19"
+
+
+def check_runtime_versions() -> None:
+    """Warn if the Python or certifi version lacks the eMudhra CA fix."""
+    major, minor, micro = sys.version_info[:3]
+    min_micro = PATCHED_PYTHON_VERSIONS.get((major, minor))
+    if min_micro is None or micro < min_micro:
+        supported = ", ".join(f"{ma}.{mi}.{mc}" for (ma, mi), mc in reversed(PATCHED_PYTHON_VERSIONS.items()))
+        logger.warning(
+            f"Python {major}.{minor}.{micro} is not a recommended version. "
+            f"Please use one of: {supported} (see https://emudhra.we-have-a-problem.com/)"
+        )
+
+    certifi_version = tuple(int(x) for x in certifi.__version__.split("."))
+    if certifi_version < tuple(int(x) for x in MIN_CERTIFI_VERSION.split(".")):
+        logger.warning(
+            f"certifi {certifi.__version__} is outdated. "
+            f"Please upgrade to {MIN_CERTIFI_VERSION} or later (see https://emudhra.we-have-a-problem.com/)"
+        )
+
 
 # Create MCP server instance
 server = Server("kanjiconv-mcp")
@@ -188,6 +216,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
 async def main():
     """Main entry point for the MCP server."""
     logger.info("Starting kanjiconv MCP server...")
+    check_runtime_versions()
 
     async with stdio_server() as (read_stream, write_stream):
         await server.run(
